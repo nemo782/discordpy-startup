@@ -1,6 +1,7 @@
 from discord.ext import commands
 import os
 import traceback
+import random
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -21,19 +22,17 @@ async def ping(ctx):
 async def neko(ctx):
     await ctx.send('にゃーん')
     
-    if message.author.bot:
-        return
-    # 「/もりちゃん」と発言したら「ﾃﾞｭﾌﾌ」が返る処理
-    if message.content == '/もりちゃん':
-        await message.channel.send('???(ﾃﾞｭﾌﾌ)')
+@bot.command()
+async def もりちゃん(ctx):
+    await ctx.send('???(ﾃﾞｭﾌﾌ)')
+    
+@bot.command()
+async def やおさん(ctx):
+    await ctx.send('なるほどね(理解していない)')
 
-    # 「/やおさん」と発言したら「以下の文章」が返る処理
-    if message.content == '/やおさん':
-        await message.channel.send('ﾝﾝ紫アーマーで殴ってくんのは違うじゃん！！')
-
-    # 「/apex character」と発言したら「キャラガチャ」が始まる処理
-    if message.content == '/apex character':
+@bot.comannd() 
+async def apex character(ctx):
         character = ["ブラハ","ジブ","ライフラ","パスファ","レイス","バンガ","ミラージュ","コースティック","オクタン","ワットソン","クリプト","レヴナント","ローバー","ランパート","ホライゾン" ]
         character_number = random.randint(0,14)
-        await message.channel.send("今回は" + character[character_number] + "に決定！")
+        await ctx.send("今回は" + character[character_number] + "に決定！")
 bot.run(token)
